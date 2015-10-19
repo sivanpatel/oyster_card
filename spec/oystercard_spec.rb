@@ -23,4 +23,19 @@ describe Oystercard do
     expect(subject.balance).to equal(2.70)
   end
 
+  it 'should initialize not being in a journey' do
+    expect(subject.in_journey).to be(false)
+  end
+
+  it 'when it touches in, it should be in a journey' do
+    subject.touch_in
+    expect(subject.in_journey).to be(true)
+  end
+
+  it 'when it touches out, it should not be in a journey' do
+    subject.touch_in
+    subject.touch_out
+    expect(subject.in_journey).to be(false)
+  end
+
 end
