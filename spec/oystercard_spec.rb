@@ -17,4 +17,10 @@ describe Oystercard do
     expect{ subject.top_up(1) }.to raise_error("Maximum balance of #{maximum_balance} exceeded")
   end
 
+  it 'should be able to deduct a value based on the fare paid' do
+    subject.top_up(5.00)
+    subject.deduct(2.30)
+    expect(subject.balance).to equal(2.70)
+  end
+
 end
