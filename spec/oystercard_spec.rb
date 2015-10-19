@@ -28,14 +28,21 @@ describe Oystercard do
   end
 
   it 'when it touches in, it should be in a journey' do
+    subject.top_up(2.00)
     subject.touch_in
     expect(subject.in_journey).to be(true)
   end
 
   it 'when it touches out, it should not be in a journey' do
+    subject.top_up(2.00)
     subject.touch_in
     subject.touch_out
     expect(subject.in_journey).to be(false)
+  end
+
+  it 'should not be able to touch in if the balance is below the minimum allowed amount' do
+    minimum_balance = Oystercard::MINIMUM_LIMIT
+    expect{ subject.touch_in }.to raise_error("Your balance needs to be above #{minimum_balance}")
   end
 
 end
